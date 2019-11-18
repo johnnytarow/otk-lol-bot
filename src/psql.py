@@ -23,7 +23,7 @@ def execute_select_query(query, parameter):
                 cursor.execute(query, parameter)
                 result = cursor.fetchall()
                 return result
-            except:
+            except Exception as e:
                 print('error: ' + query)
                 raise
 
@@ -36,7 +36,7 @@ def execute_update_query(delete_query, insert_query, delete_parameter, insert_pa
                 cursor.execute(insert_query, insert_parameter)
                 conn.commit()
                 return True
-            except:
+            except Exception as e:
                 print('error: ' + insert_query)
                 raise
 
@@ -59,15 +59,15 @@ def register_user(contest_name, team_name, discord_id, summoner_list):
                             print(is_exist)
                             print('already registered.')
                             raise
-                    except:
+                    except Exception as e:
                         print('error: check already registerd.')
                         raise
-                    
+
                     try:
                         # register
                         cursor.execute(REGISTER_USER_QUERY, [contest_name, team_name, discord_id, summoner])
                         result = True
-                    except:
+                    except Exception as e:
                         print('error: register user.')
                         raise
             if result:

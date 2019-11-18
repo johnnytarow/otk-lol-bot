@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 def parse_line(original_line, default_value=''):
     split_name = original_line.split(':', 1)
     if len(split_name) == 2:
@@ -26,7 +27,7 @@ def parse_register_message(message_text, contest_type):
                 break
             else:
                 summoner_list.append(summoner_name)
-    
+
     if contest_type == 'solo' and len(summoner_list) != 1:
         print('not solo request.')
         raise

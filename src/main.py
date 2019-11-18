@@ -54,10 +54,9 @@ async def on_message(message):
                 if message_id:
                     old_message = await channel.fetch_message(message_id)
                     await old_message.delete()
-                    
+
                 accepted_message = await channel.send(accepted_text)
                 psql.update_accepted_message(contest_name, accepted_message.id)
-
 
     # user registration
     elif str(channel_id) in config.REGISTER_CHANNELS.keys():
@@ -84,7 +83,7 @@ async def on_message(message):
                     if message_id:
                         old_message = await channel.fetch_message(message_id)
                         await old_message.delete()
-                    
+
                     accepted_message = await channel.send(accepted_text)
                     psql.update_accepted_message(contest_name, accepted_message.id)
                 print('update accepted message.')
@@ -95,7 +94,7 @@ async def on_message(message):
                 # send success message
                 success_message = await message.channel.send(config_message.REGISTER_SUCCESS.format(discord_id))
                 await success_message.delete(delay=5)
-        except:
+        except Exception as e:
             # delete message
             fail_message = await message.channel.send(config_message.REGISTER_FAIL.format(discord_id))
             await message.delete(delay=10)
